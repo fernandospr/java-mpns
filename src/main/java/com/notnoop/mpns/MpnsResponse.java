@@ -43,7 +43,7 @@ public enum MpnsResponse {
      * The notification request was accepted and queued for delivery. However,
      * the device is temporarily disconnected.
      */
-    QUEUED(200, "Received", "Temporarily Disconnected", "Active", true, false),
+    QUEUED(200, "Received", "TempDisconnected", "Active", true, false),
 
     /**
      * Queue overflow. The web service should re-send the notification later.
