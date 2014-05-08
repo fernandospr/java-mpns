@@ -78,7 +78,7 @@ public enum MpnsResponse {
      * subscription, and drop the subscription state for its corresponding
      * application session.
      */
-    EXPIRED(404, "Dropped", null, "Expired", false, false),
+    EXPIRED(404, null, null, "Expired", false, false),
 
     /**
      * Invalid method (PUT, DELETE, CREATE). Only POST is allowed when sending
