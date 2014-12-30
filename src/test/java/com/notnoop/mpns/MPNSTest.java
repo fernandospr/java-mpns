@@ -30,14 +30,11 @@
  */
 package com.notnoop.mpns;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertThat;
+
 import org.junit.Test;
-
-import com.notnoop.mpns.MPNS;
-import com.notnoop.mpns.MpnsNotificationBuilder;
-import com.notnoop.mpns.MpnsServiceBuilder;
-
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
 
 /**
  * Silly Tests

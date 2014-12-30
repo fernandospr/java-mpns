@@ -153,14 +153,14 @@ public final class Utilities {
         return null;
     }
 
-    public static void fireDelegate(MpnsNotification message, HttpResponse response, MpnsDelegate delegate) {
+    public static void fireDelegate(MpnsNotification message, HttpResponse response, MpnsDelegate delegate, String subscriptionUri) {
         if (delegate != null) {
             MpnsResponse r = Utilities.logicalResponseFor(response);
 
             if (r.isSuccessful()) {
-                delegate.messageSent(message, r);
+                delegate.messageSent(message, r, subscriptionUri);
             } else {
-                delegate.messageFailed(message, r);
+                delegate.messageFailed(message, r, subscriptionUri);
             }
         }
     }
