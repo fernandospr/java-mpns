@@ -67,6 +67,10 @@ public abstract class AbstractMpnsService implements MpnsService {
         this.push(postMessage(subscriptionUri, message.getRequestBody(),
                 message.getHttpHeaders()), message);
     }
+    
+    protected String getSubscriptionUri(HttpPost request) {
+    	return request.getURI().toString();
+    }
 
     public void start() {}
 

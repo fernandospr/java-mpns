@@ -30,14 +30,13 @@
  */
 package com.notnoop.mpns;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertThat;
+
 import org.junit.Test;
 
-import com.notnoop.mpns.MPNS;
-import com.notnoop.mpns.MpnsNotificationBuilder;
-import com.notnoop.mpns.MpnsServiceBuilder;
-
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+import com.notnoop.mpns.notifications.ToastNotification;
 
 /**
  * Silly Tests
@@ -58,5 +57,14 @@ public class MPNSTest {
     @Test
     public void newServiceGetNewInstances() {
         assertNotSame(MPNS.newService(), MPNS.newService());
+    }
+    
+    
+    @Test
+    public void fooBar() {
+        MpnsService service = MPNS.newService().build();
+        ToastNotification toast = MPNS.newNotification().toast().title("fooBar").notificationClass(null).build();
+        String uri = "https://bn1.notify.windows.com/?token=AwYAAACixQY1rcHu1IWdgQf6sOsIxtpi8RmgdHX99GAqMa8PutnbItQLM%2fvuWBWnwMMmvOaukT%2bG6gK5IPeB228pwxvLEU8WFvK3lUeVRFn7fXg2bEsS6jd%2fd92bsXAfPLjiOxQ%3d";
+        service.push(uri, toast);
     }
 }

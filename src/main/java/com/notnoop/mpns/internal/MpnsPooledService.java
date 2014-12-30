@@ -58,7 +58,7 @@ public class MpnsPooledService extends AbstractMpnsService implements MpnsServic
             public void run() {
                 try {
                     HttpResponse response = httpClient.execute(request);
-                    Utilities.fireDelegate(message, response, delegate);
+                    Utilities.fireDelegate(message, response, delegate, getSubscriptionUri(request));
                     EntityUtils.consume(response.getEntity());
                 } catch (Exception e) {
                     throw new RuntimeException(e);
