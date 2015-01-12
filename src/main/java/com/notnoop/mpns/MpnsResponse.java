@@ -34,14 +34,18 @@ package com.notnoop.mpns;
  * Represents the logical response of MpnsService
  */
 public enum MpnsResponse {
-    /*
+	/*
      * The notification request was accepted and queued for delivery.
      */
     RECEIVED(200, "Received", "Connected", "Active", true, false),
 
     /**
-     * The notification request was accepted and queued for delivery. However,
-     * the device is temporarily disconnected.
+     * The notification was processed by WNS but the device is offline.
+     */
+    DISCONNECTED(200, "Received", "Disconnected", "Active", true, false),
+
+    /**
+     * The notification request was accepted and queued for delivery.
      */
     QUEUED(200, "Received", "TempDisconnected", "Active", true, false),
 
@@ -59,6 +63,14 @@ public enum MpnsResponse {
      * notification class.
      */
     SUPPRESSED(200, "Suppressed", null, "Active", false, false),
+    
+    /***
+     * The push notification was received and dropped by the client.
+     * This occurs if application is configured to not run in background
+     * or if battery saving is enabled.
+     * This state doesn't seem to be documented yet.
+     */
+    DROPPED_BY_CLIENT(200, "Dropped", "Connected", "Active", false, false),
 
     /**
      * This error occurs when the web service sends a notification request
@@ -109,7 +121,14 @@ public enum MpnsResponse {
      * service should re-send the notification later. A best practice is to
      * use an exponential backoff algorithm in minute increments.
      */
-    SERVICE_UNAVAILABLE(503, null, null, null, false, true);
+    SERVICE_UNAVAILABLE(503, null, null, null, false, true),
+    
+   /**
+    * Undefined
+    * This is used for uninitialized responses and when we try to parse an error that does not fit above
+    * error matrix.
+    */
+    UNDEFINED(0, null, null, null, false, true);
 
     //// Response Code,NotificationStatus,DeviceConnectionStatus,SubscriptionStatus,Comments
     private final int responseCode;
