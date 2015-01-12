@@ -35,6 +35,8 @@ import java.io.UnsupportedEncodingException;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.notnoop.mpns.DeliveryClass;
 import com.notnoop.mpns.MpnsDelegate;
@@ -44,6 +46,8 @@ import com.notnoop.mpns.MpnsResponse;
 public final class Utilities {
     private Utilities() { throw new AssertionError("Uninstantiable class"); }
 
+    private static final Logger LOG = LoggerFactory.getLogger(Utilities.class);
+    
     /**
      * The content type "text/xml"
      */
@@ -149,8 +153,10 @@ public final class Utilities {
         }
 
         // Didn't find anything
-        assert false;
-        return null;
+        LOG.error("Unmatched error code - Notification status: " + headerValue(response, "X-NotificationStatus") + 
+        		", Connection status: " + headerValue(response, "X-DeviceConnectionStatus") + ", Subscription status: " 
+        		+ headerValue(response, "X-SubscriptionStatus") + ", Status code: " + Integer.toString(response.getStatusLine().getStatusCode()));
+        return MpnsResponse.UNDEFINED;
     }
 
     public static void fireDelegate(MpnsNotification message, HttpResponse response, MpnsDelegate delegate, String subscriptionUri) {

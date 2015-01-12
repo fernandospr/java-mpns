@@ -30,11 +30,11 @@
  */
 package com.notnoop.mpns.internal;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+import static com.notnoop.mpns.internal.Utilities.ifNonNull;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
-import static com.notnoop.mpns.internal.Utilities.*;
+import org.junit.Test;
 
 public class UtilitiesTest {
 
@@ -47,4 +47,5 @@ public class UtilitiesTest {
     public void isNonNullHandlesNonNull() {
         assertThat(ifNonNull("A", "asdf" + "fdsa"), is("asdffdsa"));
     }
+
 }
